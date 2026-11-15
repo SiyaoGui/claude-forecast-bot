@@ -8,8 +8,10 @@ forecast.
 
 Every 20 minutes a GitHub Actions run:
 
-1. Lists open questions in the configured tournaments and skips any the bot has
-   already forecast (FutureEval takes one forecast per question).
+1. Finds the bot tournaments that are running now (the configured ones plus any
+   new FutureEval season or MiniBench round it discovers on Metaculus), lists
+   their open questions and skips any the bot has already forecast (FutureEval
+   takes one forecast per question).
 2. For each new question, runs one research pass with Claude using its web search
    and web fetch tools: latest news and official data, the status quo, base rates,
    scheduled events before resolution, and fine-print risks.
@@ -45,7 +47,8 @@ Repository variables (optional unless noted):
 | Variable | Default | Meaning |
 |---|---|---|
 | `BOT_ENABLED` | not set | **Required for scheduled runs.** Set to `true` after a successful test run. |
-| `TOURNAMENTS` | `fall-futureeval-2026,minibench` | Comma separated tournament slugs or IDs. Update when a new season starts. |
+| `TOURNAMENTS` | `fall-futureeval-2026,minibench` | Comma separated tournament slugs or IDs that are always checked. |
+| `AUTO_DISCOVER_TOURNAMENTS` | `true` | Also check running bot tournaments found on Metaculus (FutureEval, MiniBench, AI Benchmarking), so a new season is picked up without changes. Set to `false` to use only `TOURNAMENTS`. |
 | `CLAUDE_MODEL` | `sonnet` | Model alias passed to Claude Code. |
 | `NUM_RUNS_PER_QUESTION` | `3` | Independent forecast runs per question. |
 | `MAX_QUESTIONS_PER_DAY` | `30` | Daily cap (UTC) to protect subscription usage. |
