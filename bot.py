@@ -2,8 +2,9 @@
 Autonomous forecasting bot for Metaculus FutureEval bot tournaments.
 
 How it works
-- Every run (GitHub Actions, every 20 minutes) it lists open questions in the
-  configured tournaments, skips any it has already forecast, and for each new
+- Every run (GitHub Actions, every 20 minutes) it finds the running bot
+  tournaments (configured ones plus newly discovered seasons), lists their
+  open questions, skips any it has already forecast, and for each new
   question:
     1. runs one web-research pass with Claude (WebSearch + WebFetch tools),
     2. asks Claude for an independent forecast NUM_RUNS_PER_QUESTION times,
@@ -1445,13 +1446,78 @@ async def forecast_questions(
     return list(await asyncio.gather(*[one(item) for item in items]))
 
 
+# Words that mark a Metaculus tournament as a bot tournament (FutureEval seasons,
+# MiniBench, older "AI Benchmarking" series). Matched against slug and name.
+BOT_TOURNAMENT_PATTERN = re.compile(
+    r"futureeval|future-eval|minibench|mini-bench|ai[- ]?benchmark|\baib\b|bot[- ]tournament",
+    re.IGNORECASE,
+)
+AUTO_DISCOVER = (os.getenv("AUTO_DISCOVER_TOURNAMENTS") or "true").strip().lower() != "false"
+
+
+def _parse_time(value) -> datetime.datetime | None:
+    if not value or not isinstance(value, str):
+        return None
+    try:
+        t = datetime.datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return t if t.tzinfo else t.replace(tzinfo=datetime.timezone.utc)
+
+
+def discover_bot_tournaments() -> list[str]:
+    """Find bot tournaments that are running now, so a new season is picked up
+    automatically. Returns slugs (or IDs). Any failure returns an empty list and
+    the configured tournaments are used as before."""
+    try:
+        response = requests.get(f"{API_BASE_URL}/projects/tournaments/", **AUTH_HEADERS, timeout=60)  # type: ignore
+        if not response.ok:
+            print(f"Tournament discovery skipped: HTTP {response.status_code}")
+            return []
+        data = response.json()
+    except Exception as exc:
+        print(f"Tournament discovery skipped: {type(exc).__name__}: {str(exc)[:200]}")
+        return []
+    items = data.get("results", []) if isinstance(data, dict) else data
+    now = datetime.datetime.now(datetime.timezone.utc)
+    found: list[str] = []
+    for t in items if isinstance(items, list) else []:
+        if not isinstance(t, dict):
+            continue
+        slug = str(t.get("slug") or "")
+        name = str(t.get("name") or "")
+        if not BOT_TOURNAMENT_PATTERN.search(f"{slug} {name}"):
+            continue
+        if slug == BOT_TESTING_AREA_ID or "testing" in slug:
+            continue
+        if t.get("is_ongoing") is False:
+            continue
+        start = _parse_time(t.get("start_date"))
+        end = _parse_time(t.get("forecasting_end_date") or t.get("close_date"))
+        if start and start > now:
+            continue
+        if end and end < now:
+            continue
+        found.append(slug or str(t.get("id")))
+    return found
+
+
 def parse_tournaments() -> list[str]:
     if BOT_MODE == "test":
         return [BOT_TESTING_AREA_ID]
     override = (os.getenv("TOURNAMENTS") or "").strip()
-    if override:
-        return [t.strip() for t in override.split(",") if t.strip()]
-    return list(DEFAULT_LIVE_TOURNAMENTS)
+    configured = (
+        [t.strip() for t in override.split(",") if t.strip()]
+        if override
+        else list(DEFAULT_LIVE_TOURNAMENTS)
+    )
+    if not AUTO_DISCOVER:
+        return configured
+    discovered = discover_bot_tournaments()
+    new = [t for t in discovered if t not in configured]
+    if new:
+        print(f"Discovered running bot tournaments not in the configured list: {new}")
+    return configured + new
 
 
 def count_posted_today() -> int:
