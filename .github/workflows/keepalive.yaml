@@ -1,0 +1,42 @@
+name: Bot timer
+
+# Backup timer for the forecast bot. GitHub's own schedule can be delayed or
+# not start at all on new repositories, so this job starts the forecast bot
+# every 20 minutes for almost 6 hours and then starts a fresh copy of itself.
+# It respects the BOT_ENABLED switch. Start it once by hand (Actions > Bot timer
+# > Run workflow); after that it keeps itself going. The schedule below restarts
+# it if the chain is ever broken.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  actions: write
+
+concurrency:
+  group: bot-timer
+  cancel-in-progress: false
+
+jobs:
+  timer:
+    if: vars.BOT_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Start the forecast bot every 20 minutes
+        run: |
+          for i in $(seq 1 17); do
+            gh workflow run forecast.yaml --ref main -f mode=live \
+              && echo "$(date -u +%H:%M) started forecast bot" \
+              || echo "$(date -u +%H:%M) could not start forecast bot"
+            sleep 1200
+          done
+
+      - name: Start the next timer
+        if: always()
+        run: gh workflow run keepalive.yaml --ref main
