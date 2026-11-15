@@ -1514,6 +1514,7 @@ def parse_tournaments() -> list[str]:
     if not AUTO_DISCOVER:
         return configured
     discovered = discover_bot_tournaments()
+    print(f"Running bot tournaments found on Metaculus: {discovered}")
     new = [t for t in discovered if t not in configured]
     if new:
         print(f"Discovered running bot tournaments not in the configured list: {new}")
