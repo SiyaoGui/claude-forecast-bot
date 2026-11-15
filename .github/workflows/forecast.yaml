@@ -54,6 +54,7 @@ jobs:
           CLAUDE_MODEL: ${{ vars.CLAUDE_MODEL }}
           NUM_RUNS_PER_QUESTION: ${{ vars.NUM_RUNS_PER_QUESTION }}
           MAX_QUESTIONS_PER_DAY: ${{ vars.MAX_QUESTIONS_PER_DAY }}
+          AUTO_DISCOVER_TOURNAMENTS: ${{ vars.AUTO_DISCOVER_TOURNAMENTS }}
         run: python bot.py
 
       - name: Save run log
