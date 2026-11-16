@@ -190,3 +190,6 @@ utc_time,mode,tournament,post_id,question_id,status,seconds,model,runs
 2026-11-16T20:51:40Z,live,minibench,46597,46857,usage_limit,2,opus,3
 2026-11-16T20:51:40Z,live,minibench,46596,46856,usage_limit,2,opus,3
 2026-11-16T20:51:40Z,live,minibench,46598,46858,usage_limit,3,opus,3
+2026-11-16T21:11:35Z,live,minibench,46597,46857,usage_limit,2,opus,3
+2026-11-16T21:11:35Z,live,minibench,46596,46856,usage_limit,2,opus,3
+2026-11-16T21:11:35Z,live,minibench,46598,46858,usage_limit,3,opus,3
