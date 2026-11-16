@@ -30,3 +30,7 @@ utc_time,mode,tournament,post_id,question_id,status,seconds,model,runs
 2026-11-16T05:10:22Z,live,minibench,46567,46827,error,0,opus,3
 2026-11-16T05:10:22Z,live,minibench,46569,46829,error,0,opus,3
 2026-11-16T05:10:22Z,live,minibench,46570,46830,error,0,opus,3
+2026-11-16T05:30:03Z,live,minibench,46570,46830,error,0,opus,3
+2026-11-16T05:30:03Z,live,minibench,46569,46829,error,0,opus,3
+2026-11-16T05:30:03Z,live,minibench,46571,46831,error,0,opus,3
+2026-11-16T05:30:03Z,live,minibench,46572,46832,error,0,opus,3
