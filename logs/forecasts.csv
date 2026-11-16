@@ -141,3 +141,9 @@ utc_time,mode,tournament,post_id,question_id,status,seconds,model,runs
 2026-11-16T17:11:14Z,live,minibench,46591,46851,error,0,opus,3
 2026-11-16T17:31:19Z,live,minibench,46592,46852,error,0,opus,3
 2026-11-16T17:31:19Z,live,minibench,46593,46853,error,0,opus,3
+2026-11-16T17:51:39Z,live,minibench,46592,46852,usage_limit,4,opus,3
+2026-11-16T17:51:39Z,live,minibench,46593,46853,usage_limit,3,opus,3
+2026-11-16T17:51:39Z,live,minibench,46591,46851,usage_limit,4,opus,3
+2026-11-16T17:51:39Z,live,minibench,46590,46850,usage_limit,3,opus,3
+2026-11-16T17:51:39Z,live,minibench,46594,46854,usage_limit,4,opus,3
+2026-11-16T17:51:39Z,live,minibench,46595,46855,usage_limit,4,opus,3
