@@ -13,3 +13,4 @@ utc_time,mode,tournament,post_id,question_id,status,seconds,model,runs
 2026-11-16T01:11:21Z,live,minibench,46563,46823,posted,93,opus,3
 2026-11-16T01:31:08Z,live,minibench,46564,46824,posted,86,opus,3
 2026-11-16T02:29:52Z,live,minibench,46565,46825,error,0,opus,3
+2026-11-16T02:49:43Z,live,minibench,46565,46825,error,0,opus,3
