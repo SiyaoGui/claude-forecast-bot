@@ -130,3 +130,5 @@ utc_time,mode,tournament,post_id,question_id,status,seconds,model,runs
 2026-11-16T13:50:50Z,live,minibench,46588,46848,error,0,opus,3
 2026-11-16T14:12:47Z,live,minibench,46587,46847,posted,92,opus,3
 2026-11-16T14:12:47Z,live,minibench,46588,46848,posted,116,opus,3
+2026-11-16T15:10:58Z,live,fall-futureeval-2026,46497,46753,error,0,opus,3
+2026-11-16T15:10:58Z,live,fall-futureeval-2026,46505,46767,error,0,opus,3
