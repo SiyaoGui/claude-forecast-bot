@@ -356,3 +356,8 @@ utc_time,mode,tournament,post_id,question_id,status,seconds,model,runs
 2026-11-17T17:13:57Z,live,minibench,46613,46873,error,0,opus,3
 2026-11-17T17:13:57Z,live,minibench,46614,46874,error,0,opus,3
 2026-11-17T17:13:57Z,live,minibench,46615,46875,error,0,opus,3
+2026-11-17T17:33:45Z,live,fall-futureeval-2026,46552,46814,usage_limit,2,opus,3
+2026-11-17T17:33:45Z,live,fall-futureeval-2026,46498,46754,error,0,opus,3
+2026-11-17T17:33:45Z,live,minibench,46613,46873,error,0,opus,3
+2026-11-17T17:33:45Z,live,minibench,46614,46874,error,0,opus,3
+2026-11-17T17:33:45Z,live,minibench,46615,46875,error,0,opus,3
