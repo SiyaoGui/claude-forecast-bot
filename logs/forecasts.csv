@@ -280,3 +280,5 @@ utc_time,mode,tournament,post_id,question_id,status,seconds,model,runs
 2026-11-17T05:52:27Z,live,minibench,46606,46866,usage_limit,2,opus,3
 2026-11-17T06:12:40Z,live,minibench,46606,46866,usage_limit,3,opus,3
 2026-11-17T06:32:27Z,live,minibench,46606,46866,usage_limit,1,opus,3
+2026-11-17T06:52:31Z,live,minibench,46606,46866,usage_limit,2,opus,3
+2026-11-17T06:52:31Z,live,minibench,46607,46867,usage_limit,2,opus,3
