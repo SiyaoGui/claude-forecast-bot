@@ -369,3 +369,7 @@ utc_time,mode,tournament,post_id,question_id,status,seconds,model,runs
 2026-11-17T18:14:07Z,live,minibench,46613,46873,usage_limit,2,opus,3
 2026-11-17T18:14:07Z,live,minibench,46614,46874,usage_limit,2,opus,3
 2026-11-17T18:14:07Z,live,minibench,46615,46875,error,0,opus,3
+2026-11-17T18:34:16Z,live,minibench,46615,46875,usage_limit,2,opus,3
+2026-11-17T18:34:16Z,live,minibench,46614,46874,usage_limit,2,opus,3
+2026-11-17T18:34:16Z,live,minibench,46613,46873,error,0,opus,3
+2026-11-17T18:34:16Z,live,minibench,46616,46876,error,0,opus,3
