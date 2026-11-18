@@ -409,3 +409,5 @@ utc_time,mode,tournament,post_id,question_id,status,seconds,model,runs
 2026-11-18T00:34:15Z,live,fall-futureeval-2026,46480,46736,usage_limit,1,opus,3
 2026-11-18T00:54:21Z,live,fall-futureeval-2026,46480,46736,usage_limit,1,opus,3
 2026-11-18T01:14:23Z,live,fall-futureeval-2026,46480,46736,usage_limit,1,opus,3
+2026-11-18T01:34:24Z,live,fall-futureeval-2026,46480,46736,usage_limit,2,opus,3
+2026-11-18T01:34:24Z,live,minibench,46617,46877,usage_limit,1,opus,3
